@@ -12,6 +12,7 @@ Node.js library for the [Gearman](http://gearman.org/) distributed job system wi
 #### Breaking API change
 
 -   fixed winston version
+    -   winston.Logger.prototype.isLevelEnabled
 
 ## Features
 
@@ -27,7 +28,8 @@ Node.js library for the [Gearman](http://gearman.org/) distributed job system wi
 
 ## Installation
 
-    > npm install gearmanode
+    > npm install gearmanode-up
+    > yarn add gearmanode-up
 
 -   Node package published here: https://npmjs.org/package/gearmanode
 
