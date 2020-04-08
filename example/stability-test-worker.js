@@ -1,3 +1,4 @@
+const {transports} = require('winston');
 // start following CLI command before:
 // > gearmand
 // > gearmand -p 4731
@@ -5,7 +6,7 @@
 
 var gearmanode = require('../lib/gearmanode');
 
-gearmanode.Worker.logger.transports.console.level = 'info';
+gearmanode.Worker.logger.transports.filter(transport => transport instanceof transports.Console)[0].level = 'info';
 
 var worker = gearmanode.worker({servers: [{}, {port: 4731}]});
 //var worker = gearmanode.worker({port: 4731});
