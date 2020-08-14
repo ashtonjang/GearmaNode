@@ -1,28 +1,26 @@
-const {transports} = require('winston');
+const { transports } = require('winston');
 // start following CLI command before:
 // > gearmand
 // > gearmand -p 4731
 
-
 var gearmanode = require('../lib/gearmanode');
 
-gearmanode.Worker.logger.transports.filter(transport => transport instanceof transports.Console)[0].level = 'info';
+//gearmanode.Worker.logger.transports.filter(transport => transport instanceof transports.Console)[0].level = 'info';
+gearmanode.Worker.logger.transports.console.level = 'error';
 
-var worker = gearmanode.worker({servers: [{}, {port: 4731}]});
+var worker = gearmanode.worker({ servers: [{}, { port: 4731 }] });
 //var worker = gearmanode.worker({port: 4731});
-
 
 // Foreground Job
 worker.addFunction('reverse', function (job) {
-	console.log('>>> reverse: ' + job.handle + ', serverUid: ' + job.jobServerUid + ', payload: ' + job.payload)
-    var rslt = job.payload.toString().split("").reverse().join("");
+    console.log('>>> reverse: ' + job.handle + ', serverUid: ' + job.jobServerUid + ', payload: ' + job.payload);
+    var rslt = job.payload.toString().split('').reverse().join('');
     job.workComplete(rslt);
 });
 
-
 // Background Job
 worker.addFunction('add', function (job) {
-	console.log('>>> add: ' + job.handle + ', serverUid: ' + job.jobServerUid + ', payload: ' + job.payload)
+    console.log('>>> add: ' + job.handle + ', serverUid: ' + job.jobServerUid + ', payload: ' + job.payload);
     var ab = job.payload.toString().split(' ');
     var a = new Number(ab[0]);
     var b = new Number(ab[1]);
